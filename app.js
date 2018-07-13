@@ -5,7 +5,6 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var configdata = require('./config/config');
 const cors = require('cors');
-//var common_function = require('./lib/common_function');
 var dbmodel = require('./lib/dbquery');
 
 var mysql = require('mysql');
@@ -45,19 +44,7 @@ app.get('/users/:id', function (req, res) {
     });
 });
 
-//Get passttype API
-app.get('/passtype', function (req, res) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Credentials', 'false')
-    res.setHeader('Access-Control-Expose-Headers', 'Content-Length, X-JSON');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', '*');
-
-    dbmodel.getPassType(req, mysqlconn, function (result) {
-        res.json(result);
-    });
-});
-
+// Get passttype API
 app.get('/getpasstype', function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Credentials', 'false')
@@ -101,7 +88,7 @@ app.post('/createbmtcid', function (req, res) {
     });
 });
 
-
+// SIGN UP API
 app.post('/register', function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Credentials', 'false')
