@@ -44,6 +44,19 @@ app.get('/users/:id', function (req, res) {
     });
 });
 
+//Get PeriodType by id API
+app.get('/periodtype/', function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', 'false')
+    res.setHeader('Access-Control-Expose-Headers', 'Content-Length, X-JSON');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', '*');
+
+    dbmodel.getPeriodType(req, mysqlconn, function (result) {
+        res.json(result);
+    });
+});
+
 // Get passttype API
 app.get('/getpasstype', function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -75,20 +88,6 @@ app.post('/login', function (req, res) {
 });
 
 //BMTC id card creation API
-app.post('/createbmtcid', function (req, res) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Credentials', 'false')
-    res.setHeader('Access-Control-Expose-Headers', 'Content-Length, X-JSON');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
-
-    dbmodel.createBMTCID(req, mysqlconn, function (result) {
-        res.json(result);
-    });
-});
-
-// SIGN UP API
 app.post('/register', function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Credentials', 'false')
@@ -97,7 +96,21 @@ app.post('/register', function (req, res) {
     res.setHeader('Access-Control-Allow-Headers', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
 
-    dbmodel.doRegistration(req, mysqlconn, function (result) {
+    dbmodel.register(req, mysqlconn, function (result) {
+        res.json(result);
+    });
+});
+
+// SIGN UP API
+app.post('/userupdate', function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', 'false')
+    res.setHeader('Access-Control-Expose-Headers', 'Content-Length, X-JSON');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
+
+    dbmodel.updateUser(req, mysqlconn, function (result) {
         res.json(result);
     });
 });
