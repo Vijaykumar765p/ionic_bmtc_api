@@ -17,7 +17,8 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-
+// GET METHODS
+/*----------------------------------------------------------------------------------------------------------*/
 //Get all users API
 app.get('/users', function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -69,6 +70,7 @@ app.get('/getpasstype', function (req, res) {
     });
 });
 
+/*------------------------------------------------------------------------------------------------------*/
 //Login API
 app.post('/login', function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -117,4 +119,73 @@ app.post('/userupdate', function (req, res) {
 
 http.createServer(app).listen(2000, function (err) {
     console.log('running server on port 2000');
+});
+
+/*-----------------------------------------------------------------------------------------------------------*/
+// BMTC SLOTBOOKING APP API's
+
+// GET METHODS
+
+//Get PeriodType by id API
+app.get('/places/', function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', 'false')
+    res.setHeader('Access-Control-Expose-Headers', 'Content-Length, X-JSON');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', '*');
+
+    dbmodel.getPlace(req, mysqlconn, function (result) {
+        res.json(result);
+    });
+});
+
+app.get('/trip/', function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', 'false')
+    res.setHeader('Access-Control-Expose-Headers', 'Content-Length, X-JSON');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', '*');
+
+    dbmodel.getTRIP(req, mysqlconn, function (result) {
+        res.json(result);
+    });
+});
+
+app.get('/tripbusdetails/', function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', 'false')
+    res.setHeader('Access-Control-Expose-Headers', 'Content-Length, X-JSON');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', '*');
+
+    dbmodel.gettripBusDetails(req, mysqlconn, function (result) {
+        res.json(result);
+
+    });
+});
+
+app.get('/getfromlocationdetails/', function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', 'false')
+    res.setHeader('Access-Control-Expose-Headers', 'Content-Length, X-JSON');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', '*');
+
+    dbmodel.getFromLocationDetails(req, mysqlconn, function (result) {
+        res.json(result);
+
+    });
+});
+
+app.get('/gettolocationdetails/', function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', 'false')
+    res.setHeader('Access-Control-Expose-Headers', 'Content-Length, X-JSON');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', '*');
+
+    dbmodel.getToLocationDetails(req, mysqlconn, function (result) {
+        res.json(result);
+
+    });
 });
