@@ -190,7 +190,48 @@ app.get('/gettolocationdetails/', function (req, res) {
     });
 });
 
-app.post('/bmtcslotlogin/', function (req, res) {
+app.get('/confirmseats/', function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', 'false')
+    res.setHeader('Access-Control-Expose-Headers', 'Content-Length, X-JSON');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', '*');
+
+    dbmodel.confirmseats(req, mysqlconn, function (result) 
+    {
+        res.json(result);
+    });
+});
+
+
+app.get('/getbusticketdetails/', function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', 'false')
+    res.setHeader('Access-Control-Expose-Headers', 'Content-Length, X-JSON');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', '*');
+
+    dbmodel.getbusticketdetails(req, mysqlconn, function (result) 
+    {
+        res.json(result);
+    });
+});
+
+app.get('/getbus/', function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', 'false')
+    res.setHeader('Access-Control-Expose-Headers', 'Content-Length, X-JSON');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', '*');
+
+    dbmodel.getBUS(req, mysqlconn, function (result) 
+    {
+        res.json(result);
+    });
+});
+
+
+app.post('/bmtcslotlogin', function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Credentials', 'false')
     res.setHeader('Access-Control-Expose-Headers', 'Content-Length, X-JSON');
@@ -198,10 +239,11 @@ app.post('/bmtcslotlogin/', function (req, res) {
     res.setHeader('Access-Control-Allow-Headers', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
 
-    var bdobj = JSON.parse(Object.keys(req.body)[0]);
-    console.log(bdobj['uname']);
-    console.log(bdobj['password']);
-    dbmodel.bmtcSlotLogin(req, mysqlconn, function (result) {
+    /*var bdobj=JSON.parse(Object.keys(req.body)[0]);
+     console.log(bdobj['email']);
+     console.log(bdobj['password']);*/
+    //res.json();
+    dbmodel.doslotLogin(req, mysqlconn, function (result) {
         res.json(result);
     });
 });
